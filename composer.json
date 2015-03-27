@@ -13,6 +13,12 @@
 	"support": {
 		"issues": "https://github.com/FrozenNode/Laravel-Administrator/issues"
 		},
+		"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/BenWoodford/kcfinder.git"
+		}
+		],
 		"require": {
 			"php": ">=5.4.0",
 			"laravel/framework": "5.*",
