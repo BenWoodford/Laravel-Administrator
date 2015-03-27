@@ -3,14 +3,14 @@
 	/**
 	 * For the item form transition
 	 */
-	ko.bindingHandlers.itemTransition = {
-		init: function(element, valueAccessor, allBindingsAccessor, viewModel, context)
-		{
-			var $element = $(element),
-				viewModel = context.$root,
-				$child = $element.find('.item_edit'),
-				$tableContainer = $('div.table_container'),
-				expandWidth = viewModel.expandWidth();
+	 ko.bindingHandlers.itemTransition = {
+	 	init: function(element, valueAccessor, allBindingsAccessor, viewModel, context)
+	 	{
+	 		var $element = $(element),
+	 		viewModel = context.$root,
+	 		$child = $element.find('.item_edit'),
+	 		$tableContainer = $('div.table_container'),
+	 		expandWidth = viewModel.expandWidth();
 
 			//the lastItem gets reset to null when the form is closed. This way we can draw the table properly initially
 			//so that it doesn't keep reopening.
@@ -29,10 +29,10 @@
 		update: function(element, valueAccessor, allBindingsAccessor, viewModel, context)
 		{
 			var $element = $(element),
-				viewModel = context.$root,
-				$child = $element.find('.item_edit'),
-				$tableContainer = $('div.table_container'),
-				expandWidth = viewModel.expandWidth();
+			viewModel = context.$root,
+			$child = $element.find('.item_edit'),
+			$tableContainer = $('div.table_container'),
+			expandWidth = viewModel.expandWidth();
 
 			//if the value is false, we want to hide the form, otherwise show it
 			if (!valueAccessor())
@@ -63,22 +63,22 @@
 	};
 
 	var select2Defaults = {
-			placeholder: adminData.languages['select_options'],
-			formatNoMatches: function(term)
-			{
-				return adminData.languages['no_results'];
-			},
-			width: 'resolve',
-			allowClear: true
-		};
+		placeholder: adminData.languages['select_options'],
+		formatNoMatches: function(term)
+		{
+			return adminData.languages['no_results'];
+		},
+		width: 'resolve',
+		allowClear: true
+	};
 
 	//for select2
 	ko.bindingHandlers.select2 = {
 		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
 		{
 			var options = valueAccessor(),
-				defaults = $.extend({}, select2Defaults),
-				data;
+			defaults = $.extend({}, select2Defaults),
+			data;
 
 			if (options && typeof options === 'object')
 			{
@@ -124,7 +124,7 @@
 			if (options.sort)
 			{
 				var listData = $(element).data('list_data'),
-					val = $(element).val();
+				val = $(element).val();
 
 				//initially we want to reset the list data so we can work with a fresh, alphabetized sort
 				$(element).data('list_data', [].concat($(element).data('original_list_data')));
@@ -133,8 +133,8 @@
 				if (val)
 				{
 					var vals = val.split(','),
-						topItems = [],
-						allItems = $(element).data('list_data');
+					topItems = [],
+					allItems = $(element).data('list_data');
 
 					//iterate over the values
 					$.each(vals, function(ind, el)
@@ -171,32 +171,32 @@
 	var select2RemoteHandler = function (element, valueAccessor, allBindingsAccessor, viewModel, context)
 	{
 		var options = valueAccessor(),
-			defaults = $.extend({
-				minimumInputLength: 1,
-				allowClear: true,
-				ajax: {
-					url: base_url + adminData.model_name + '/update_options',
-					dataType: 'json',
-					quietMillis: 100,
-					type: 'POST',
-					data: function(term, page)
-					{
-						var data = {
-								term: term,
-								page: page,
-								field: options.field,
-								type: options.type,
-								constraints: {}
-							};
+		defaults = $.extend({
+			minimumInputLength: 1,
+			allowClear: true,
+			ajax: {
+				url: base_url + adminData.model_name + '/update_options',
+				dataType: 'json',
+				quietMillis: 100,
+				type: 'POST',
+				data: function(term, page)
+				{
+					var data = {
+						term: term,
+						page: page,
+						field: options.field,
+						type: options.type,
+						constraints: {}
+					};
 
-						if (data.type === 'edit')
-						{
-							data.selectedItems = admin.viewModel[data.field]();
-						}
-						else if (data.type === 'filter')
-						{
-							data.selectedItems = admin.filtersViewModel.filters[parseInt(options.filterIndex)].value();
-						}
+					if (data.type === 'edit')
+					{
+						data.selectedItems = admin.viewModel[data.field]();
+					}
+					else if (data.type === 'filter')
+					{
+						data.selectedItems = admin.filtersViewModel.filters[parseInt(options.filterIndex)].value();
+					}
 
 						//figure out if there are any constraints that we need to send over
 						if (options.constraints)
@@ -212,7 +212,7 @@
 					results: function(returndata, page)
 					{
 						var data = {},
-							val = $(element).val();
+						val = $(element).val();
 
 						//we want to update the autocomplete index so we can show all possibly-selected items
 						if (val)
@@ -238,7 +238,7 @@
 				},
 				initSelection: function(element, callback) {
 					var data = [],
-						val = $(element).val();
+					val = $(element).val();
 
 					if (!val)
 						return callback(null);
@@ -261,10 +261,10 @@
 				}
 			}, select2Defaults);
 
-		if (options && typeof options === 'object')
-		{
-			$.extend(defaults, options);
-		}
+if (options && typeof options === 'object')
+{
+	$.extend(defaults, options);
+}
 
 		//init select2 if it isn't already set up
 		if ($(element).data("select2") === undefined || $(element).data("select2") === null)
@@ -296,13 +296,13 @@
 	/**
 	 * The number binding ensures that a value is decimal-like
 	 */
-	ko.bindingHandlers.number = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-		{
-			var options = valueAccessor(),
-				value = allBindingsAccessor().value(),
-				floatVal,
-				$element = $(element);
+	 ko.bindingHandlers.number = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+	 	{
+	 		var options = valueAccessor(),
+	 		value = allBindingsAccessor().value(),
+	 		floatVal,
+	 		$element = $(element);
 
 			//if this is a null or false value, run a parseFloat on it so we can check for isNaN later
 			if (value === null || value === false)
@@ -343,155 +343,155 @@
 	/**
 	 * The datepicker binding makes sure the jQuery UI datepicker is set for this item
 	 */
-	ko.bindingHandlers.datepicker = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-		{
-			var options = valueAccessor();
+	 ko.bindingHandlers.datepicker = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+	 	{
+	 		var options = valueAccessor();
 
-			$(element).datepicker({
-				dateFormat: options.dateFormat
-			});
-		}
-	};
+	 		$(element).datepicker({
+	 			dateFormat: options.dateFormat
+	 		});
+	 	}
+	 };
 
 	/**
 	 * The formatDate binding transforms a date string into a formatted date
 	 */
-	ko.bindingHandlers.formatDate = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-		{
-			var options = valueAccessor(),
-				dateVal = options.value.length === 10 ? options.val + ' 00:00' : options.val;
+	 ko.bindingHandlers.formatDate = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+	 	{
+	 		var options = valueAccessor(),
+	 		dateVal = options.value.length === 10 ? options.val + ' 00:00' : options.val;
 
-			$(element).text($.datepicker.formatDate(options.dateFormat, new Date(options.value)));
-		}
-	};
+	 		$(element).text($.datepicker.formatDate(options.dateFormat, new Date(options.value)));
+	 	}
+	 };
 
 	/**
 	 * The timepicker binding makes sure the jQuery UI timepicker is set for this item
 	 */
-	ko.bindingHandlers.timepicker = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-		{
-			var options = valueAccessor(),
-				val = allBindingsAccessor().value(),
-				date = new Date('01/01/2013 ' + val),
-				timeObject = {
-					hour: date.getHours(),
-					minute: date.getMinutes()
-				};
+	 ko.bindingHandlers.timepicker = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+	 	{
+	 		var options = valueAccessor(),
+	 		val = allBindingsAccessor().value(),
+	 		date = new Date('01/01/2013 ' + val),
+	 		timeObject = {
+	 			hour: date.getHours(),
+	 			minute: date.getMinutes()
+	 		};
 
-			if (val)
-				$(element).val($.datepicker.formatTime(options.timeFormat, timeObject));
+	 		if (val)
+	 			$(element).val($.datepicker.formatTime(options.timeFormat, timeObject));
 
-			$(element).timepicker({
-				timeFormat: options.timeFormat
-			});
-		}
-	};
+	 		$(element).timepicker({
+	 			timeFormat: options.timeFormat
+	 		});
+	 	}
+	 };
 
 	/**
 	 * The formatTime binding transforms a time string into a formatted time
 	 */
-	ko.bindingHandlers.formatTime = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-		{
-			var options = valueAccessor(),
-				date = new Date('01/01/2012 ' + options.value),
-				timeObject = {
-					hour: date.getHours(),
-					minute: date.getMinutes()
-				};
+	 ko.bindingHandlers.formatTime = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+	 	{
+	 		var options = valueAccessor(),
+	 		date = new Date('01/01/2012 ' + options.value),
+	 		timeObject = {
+	 			hour: date.getHours(),
+	 			minute: date.getMinutes()
+	 		};
 
-			$(element).text($.datepicker.formatTime(options.timeFormat, timeObject));
-		}
-	};
+	 		$(element).text($.datepicker.formatTime(options.timeFormat, timeObject));
+	 	}
+	 };
 
 	/**
 	 * The datetimepicker binding makes sure the jQuery UI datetimepicker is set for this item
 	 */
-	ko.bindingHandlers.datetimepicker = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-		{
-			var options = valueAccessor(),
-				val = allBindingsAccessor().value(),
-				date = new Date(val),
-				timeObject = {
-					hour: date.getHours(),
-					minute: date.getMinutes()
-				};
+	 ko.bindingHandlers.datetimepicker = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+	 	{
+	 		var options = valueAccessor(),
+	 		val = allBindingsAccessor().value(),
+	 		date = new Date(val),
+	 		timeObject = {
+	 			hour: date.getHours(),
+	 			minute: date.getMinutes()
+	 		};
 
-			if (val && !isNaN(date.getHours()))
-			{
+	 		if (val && !isNaN(date.getHours()))
+	 		{
 
-				var formattedDate = $.datepicker.formatDate(options.dateFormat, date),
-					formattedTime = $.datepicker.formatTime(options.timeFormat, timeObject);
+	 			var formattedDate = $.datepicker.formatDate(options.dateFormat, date),
+	 			formattedTime = $.datepicker.formatTime(options.timeFormat, timeObject);
 
-				$(element).val(formattedDate + ' ' + formattedTime);
-			}
+	 			$(element).val(formattedDate + ' ' + formattedTime);
+	 		}
 
-			$(element).datetimepicker({
-				dateFormat: options.dateFormat,
-				timeFormat: options.timeFormat
-			});
-		}
-	};
+	 		$(element).datetimepicker({
+	 			dateFormat: options.dateFormat,
+	 			timeFormat: options.timeFormat
+	 		});
+	 	}
+	 };
 
 	/**
 	 * The formatTime binding transforms a datetime string into a formatted datetime
 	 */
-	ko.bindingHandlers.formatDateTime = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-		{
-			var options = valueAccessor(),
-				date = new Date(options.value),
-				timeObject = {
-					hour: date.getHours(),
-					minute: date.getMinutes()
-				};
+	 ko.bindingHandlers.formatDateTime = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+	 	{
+	 		var options = valueAccessor(),
+	 		date = new Date(options.value),
+	 		timeObject = {
+	 			hour: date.getHours(),
+	 			minute: date.getMinutes()
+	 		};
 
-			if (!isNaN(date.getHours()))
-			{
-				var formattedDate = $.datepicker.formatDate(options.dateFormat, date),
-					formattedTime = $.datepicker.formatTime(options.timeFormat, timeObject);
+	 		if (!isNaN(date.getHours()))
+	 		{
+	 			var formattedDate = $.datepicker.formatDate(options.dateFormat, date),
+	 			formattedTime = $.datepicker.formatTime(options.timeFormat, timeObject);
 
-				$(element).text(formattedDate + ' ' + formattedTime);
-			}
-		}
-	};
+	 			$(element).text(formattedDate + ' ' + formattedTime);
+	 		}
+	 	}
+	 };
 
 	/**
 	 * The characterLimit binding makes sure a text field only has so many characters
 	 */
-	ko.bindingHandlers.characterLimit = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-		{
-			var limit = valueAccessor(),
-				val = allBindingsAccessor().value();
+	 ko.bindingHandlers.characterLimit = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+	 	{
+	 		var limit = valueAccessor(),
+	 		val = allBindingsAccessor().value();
 
-			val = val === null ? '' : val + '';
+	 		val = val === null ? '' : val + '';
 
-			if (!limit || val === null || val.length < limit)
-				return;
+	 		if (!limit || val === null || val.length < limit)
+	 			return;
 
-			val = val.substr(0, limit);
+	 		val = val.substr(0, limit);
 
-			$(element).val(val);
-			allBindingsAccessor().value(val);
-		}
-	};
+	 		$(element).val(val);
+	 		allBindingsAccessor().value(val);
+	 	}
+	 };
 
 	/**
 	 * The charactersLeft binding fills the element with (#chars allowed - #chars typed)
 	 */
-	ko.bindingHandlers.charactersLeft = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-		{
-			var options = valueAccessor(),
-				limit = options.limit,
-				val = options.value();
+	 ko.bindingHandlers.charactersLeft = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+	 	{
+	 		var options = valueAccessor(),
+	 		limit = options.limit,
+	 		val = options.value();
 
-			val = val === null ? '' : val + '';
+	 		val = val === null ? '' : val + '';
 
 			//if the limit is zero, there is no limit
 			if (!limit)
@@ -504,57 +504,71 @@
 			left = limit - val.length;
 
 //			text = ' character' + (left !== 1 ? 's' : '') + ' left';
-			text = (left !== 1 ? adminData.languages['characters_left'] : adminData.languages['character_left']);
+text = (left !== 1 ? adminData.languages['characters_left'] : adminData.languages['character_left']);
 
-			$(element).text(left + text);
-		}
-	};
+$(element).text(left + text);
+}
+};
 
 	/**
 	 * This ensures that a bool field is always a boolean value
 	 */
-	ko.bindingHandlers.bool = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel, context)
-		{
-			var viewModel = context.$root,
-				modelVal = viewModel[valueAccessor()]();
+	 ko.bindingHandlers.bool = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel, context)
+	 	{
+	 		var viewModel = context.$root,
+	 		modelVal = viewModel[valueAccessor()]();
 
-			if (modelVal === '0')
-				viewModel[valueAccessor()](false);
-			else if (modelVal === '1')
-				viewModel[valueAccessor()](true);
-		}
-	};
+	 		if (modelVal === '0')
+	 			viewModel[valueAccessor()](false);
+	 		else if (modelVal === '1')
+	 			viewModel[valueAccessor()](true);
+	 	}
+	 };
 
-	var editors = {};
+	 var editors = {};
 
 	/**
 	 * The wysiwyg binding makes the field a ckeditor wysiwyg
 	 */
-	ko.bindingHandlers.wysiwyg = {
-		init: function (element, valueAccessor, allBindingsAccessor, context)
-		{
-			var options = valueAccessor(),
-				value = ko.utils.unwrapObservable(options.value),
-				$element = $(element),
-				editor;
+	 ko.bindingHandlers.wysiwyg = {
+	 	init: function (element, valueAccessor, allBindingsAccessor, context)
+	 	{
+	 		var options = valueAccessor(),
+	 		value = ko.utils.unwrapObservable(options.value),
+	 		$element = $(element),
+	 		editor;
 
-			value = value ? value : '';
+	 		value = value ? value : '';
 
-			$element.html(value);
+	 		$element.html(value);
 
-			if (options.id in editors)
-				editor = editors[options.id];
-			else
-			{
-				$element.ckeditor({
-					language : language,
-					readOnly : !adminData.edit_fields[context.field_name].editable
-				});
+	 		if (options.id in editors)
+	 			editor = editors[options.id];
+	 		else
+	 		{
+	 			$element.ckeditor({
+	 				language : language,
+	 				readOnly : !adminData.edit_fields[context.field_name].editable
+	 			});
 
-				editor = $element.ckeditorGet();
-				editors[options.id] = editor;
-			}
+	 			editor = $element.ckeditorGet();
+	 			editors[options.id] = editor;
+
+	 			var kcfinderOptions = adminData.edit_fields[context.field_name].kcfinder;
+	 			if(typeof kcfinderOptions !== 'undefined') {
+	 				if(kcfinderOptions.enabled === true || kcfinderOptions.disabled === false) {
+	 					var kcfinder_path = site_url+'/packages/frozennode/administrator/js/kcfinder/';
+	 					var kcfinder_params = '?cms=laraveladministrator&model='+adminData.model_name+'&field='+context.field_name+'&opener=ckeditor';
+	 					editor.config.filebrowserBrowseUrl      = kcfinder_path+'browse.php'+kcfinder_params+'&type=files';
+	 					editor.config.filebrowserImageBrowseUrl = kcfinder_path+'browse.php'+kcfinder_params+'&type=images';
+	 					editor.config.filebrowserFlashBrowseUrl = kcfinder_path+'browse.php'+kcfinder_params+'&type=flash';
+	 					editor.config.filebrowserUploadUrl      = kcfinder_path+'upload.php'+kcfinder_params+'&type=files';
+	 					editor.config.filebrowserImageUploadUrl = kcfinder_path+'upload.php'+kcfinder_params+'&type=images';
+	 					editor.config.filebrowserFlashUploadUrl = kcfinder_path+'upload.php'+kcfinder_params+'&type=flash';
+	 				}
+	 			}
+	 		}
 
 			//when the editor is loaded, we want to resize our page
 			editor.on('loaded', function()
@@ -574,7 +588,7 @@
 			editor.focusManager.blur = function()
 			{
 				var observable = valueAccessor().value,
-					$el = $('#' + options.id);
+				$el = $('#' + options.id);
 
 				//set the blur attribute to true so we know now to set the editor data in the update method
 				$el.data('blur', true);
@@ -597,9 +611,9 @@
 		{
 			//handle programmatic updates to the observable
 			var options = valueAccessor(),
-				value = ko.utils.unwrapObservable(options.value),
-				$element = $(element),
-				editor = editors[options.id];
+			value = ko.utils.unwrapObservable(options.value),
+			$element = $(element),
+			editor = editors[options.id];
 
 			value = value ? value : '';
 
@@ -630,8 +644,8 @@
 	 * The markdown binding is attached to the field next a markdown textarea
 	 */
 	 ko.bindingHandlers.markdown = {
-		update: function (element, valueAccessor, allBindingsAccessor, context)
-		{
+	 	update: function (element, valueAccessor, allBindingsAccessor, context)
+	 	{
 			//handle programmatic updates to the observable
 			var value = ko.utils.unwrapObservable(valueAccessor());
 
@@ -644,85 +658,85 @@
 				$(element).html(markdown.toHTML(value.toString()));
 			}
 		}
-	 };
+	};
 
 	/**
 	 * The enumText binding converts a value and an options array to a "Label (value)" readable format
 	 */
-	ko.bindingHandlers.enumText = {
-		update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-		{
-			var options = valueAccessor(),
-				value = options.value,
-				enumOptions = options.enumOptions;
+	 ko.bindingHandlers.enumText = {
+	 	update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+	 	{
+	 		var options = valueAccessor(),
+	 		value = options.value,
+	 		enumOptions = options.enumOptions;
 
-			for (var i = 0; i < enumOptions.length; i++) {
-				if(enumOptions[i].id == value) {
-					$(element).html( enumOptions[i].text + " (" + value + ")" );
-					return;
-				}
-			}
+	 		for (var i = 0; i < enumOptions.length; i++) {
+	 			if(enumOptions[i].id == value) {
+	 				$(element).html( enumOptions[i].text + " (" + value + ")" );
+	 				return;
+	 			}
+	 		}
 
-			$(element).html(value);
-		}
-	};
+	 		$(element).html(value);
+	 	}
+	 };
 
 	/**
 	 * File uploader using plupload
 	 */
-	ko.bindingHandlers.fileupload = {
-		init: function(element, valueAccessor, allBindingsAccessor, viewModel, context)
-		{
-			var options = valueAccessor(),
-				cacheName = options.field + '_uploader',
-				viewModel = context.$root,
-				filters = options.image ? [{title: 'Image files', extensions: 'jpg,jpeg,gif,png'}] : [];
+	 ko.bindingHandlers.fileupload = {
+	 	init: function(element, valueAccessor, allBindingsAccessor, viewModel, context)
+	 	{
+	 		var options = valueAccessor(),
+	 		cacheName = options.field + '_uploader',
+	 		viewModel = context.$root,
+	 		filters = options.image ? [{title: 'Image files', extensions: 'jpg,jpeg,gif,png'}] : [];
 
-			viewModel[cacheName] = new plupload.Uploader({
-				runtimes: 'html5,flash,silverlight,gears,browserplus',
-				browse_button: cacheName,
-				container: 'edit_field_' + options.field,
-				drop_element: cacheName,
-				multi_selection: false,
-				max_file_size: options.size_limit + 'mb',
-				url: options.upload_url,
-				flash_swf_url: asset_url + 'js/plupload/js/plupload.flash.swf',
-				silverlight_xap_url: asset_url + 'js/plupload/js/plupload.silverlight.xap',
-				filters: filters,
-				multipart_params: {"_token" : window.csrf}
-			});
+	 		viewModel[cacheName] = new plupload.Uploader({
+	 			runtimes: 'html5,flash,silverlight,gears,browserplus',
+	 			browse_button: cacheName,
+	 			container: 'edit_field_' + options.field,
+	 			drop_element: cacheName,
+	 			multi_selection: false,
+	 			max_file_size: options.size_limit + 'mb',
+	 			url: options.upload_url,
+	 			flash_swf_url: asset_url + 'js/plupload/js/plupload.flash.swf',
+	 			silverlight_xap_url: asset_url + 'js/plupload/js/plupload.silverlight.xap',
+	 			filters: filters,
+	 			multipart_params: {"_token" : window.csrf}
+	 		});
 
-			viewModel[cacheName].init();
+	 		viewModel[cacheName].init();
 
-			viewModel[cacheName].bind('FilesAdded', function(up, files) {
+	 		viewModel[cacheName].bind('FilesAdded', function(up, files) {
 
-				viewModel.freezeActions(true);
+	 			viewModel.freezeActions(true);
 
-				$(files).each(function(i, file) {
+	 			$(files).each(function(i, file) {
 					//parent.uploader.removeFile(file);
 
 				});
 
-				options.upload_percentage(0);
-				options.uploading(true);
+	 			options.upload_percentage(0);
+	 			options.uploading(true);
 
-				viewModel[cacheName].start();
-			});
+	 			viewModel[cacheName].start();
+	 		});
 
-			viewModel[cacheName].bind('UploadProgress', function(up, file) {
-				options.upload_percentage(file.percent);
-			});
+	 		viewModel[cacheName].bind('UploadProgress', function(up, file) {
+	 			options.upload_percentage(file.percent);
+	 		});
 
-			viewModel[cacheName].bind('Error', function(up, err) {
-				alert(err.message);
-			});
+	 		viewModel[cacheName].bind('Error', function(up, err) {
+	 			alert(err.message);
+	 		});
 
-			viewModel[cacheName].bind('FileUploaded', function(up, file, response) {
-				var data = JSON.parse(response.response);
+	 		viewModel[cacheName].bind('FileUploaded', function(up, file, response) {
+	 			var data = JSON.parse(response.response);
 
-				options.uploading(false);
+	 			options.uploading(false);
 
-				if (data.errors.length === 0) {
+	 			if (data.errors.length === 0) {
 					//success
 					//iterate over the files until we find it and then set the proper fields
 					viewModel[options.field](data.filename);
@@ -741,15 +755,15 @@
 				}, 200);
 			});
 
-			$('#' + cacheName).bind('dragenter', function(e)
-			{
-				$(this).addClass('drag');
-			});
+	 		$('#' + cacheName).bind('dragenter', function(e)
+	 		{
+	 			$(this).addClass('drag');
+	 		});
 
-			$('#' + cacheName).bind('dragleave drop', function(e)
-			{
-				$(this).removeClass('drag');
-			});
+	 		$('#' + cacheName).bind('dragleave drop', function(e)
+	 		{
+	 			$(this).removeClass('drag');
+	 		});
 
 			//destroy the existing editor if the DOM node is removed
 			ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
@@ -759,8 +773,8 @@
 		update: function(element, valueAccessor, allBindingsAccessor, viewModel, context)
 		{
 			var options = valueAccessor(),
-				cacheName = options.field + '_uploader',
-				viewModel = context.$root;
+			cacheName = options.field + '_uploader',
+			viewModel = context.$root;
 
 			//hack to get the z-index properly set up
 			setTimeout(function()

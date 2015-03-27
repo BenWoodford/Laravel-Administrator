@@ -18,7 +18,7 @@ class Factory {
 		'key' => 'Frozennode\\Administrator\\Fields\\Key',
 		'text' => 'Frozennode\\Administrator\\Fields\\Text',
 		'textarea' => 'Frozennode\\Administrator\\Fields\\Text',
-		'wysiwyg' => 'Frozennode\\Administrator\\Fields\\Text',
+		'wysiwyg' => 'Frozennode\\Administrator\\Fields\\Wysiwyg',
 		'markdown' => 'Frozennode\\Administrator\\Fields\\Text',
 		'password' => 'Frozennode\\Administrator\\Fields\\Password',
 		'date' => 'Frozennode\\Administrator\\Fields\\Time',
@@ -37,7 +37,7 @@ class Factory {
 		'has_one' => 'Frozennode\\Administrator\\Fields\\Relationships\\HasOne',
 		'has_many' => 'Frozennode\\Administrator\\Fields\\Relationships\\HasMany',
 
-	);
+		);
 
 	/**
 	 * The base string for the relationship classes
@@ -284,7 +284,7 @@ class Factory {
 		if ($this->config->getType() === 'settings' && in_array($options['type'], $this->settingsFieldExclusions))
 		{
 			throw new \InvalidArgumentException('The ' . $options['type'] . ' field in your ' .
-							$this->config->getOption('name') . ' settings page cannot be used on a settings page');
+				$this->config->getOption('name') . ' settings page cannot be used on a settings page');
 		}
 	}
 
@@ -299,7 +299,7 @@ class Factory {
 	{
 		$model = $this->config->getDataModel();
 		$invalidArgument = new \InvalidArgumentException("The '" . $field . "' relationship field you supplied for " .
-								$this->config->getOption('name') . " is not a valid relationship method name on the supplied Eloquent model");
+			$this->config->getOption('name') . " is not a valid relationship method name on the supplied Eloquent model");
 
 		//check if the related method exists on the model
 		if (!method_exists($model, $field))
@@ -757,7 +757,7 @@ class Factory {
 			$return[] = array(
 				'id' => $m->getKey(),
 				'text' => strval($m->{$field->getOption('name_field')}),
-			);
+				);
 		}
 
 		return $return;
