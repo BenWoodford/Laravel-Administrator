@@ -32,11 +32,13 @@
 					},
 					"scripts": {
 						"post-update-cmd": [
-						"if [ -d \"public/js/ckeditor/\" ] \nthen \nrm -R public/js/ckeditor/ \nfi ",
-						"if [ -d \"vendor/ckeditor/ckeditor/\" ] \nthen \nmv vendor/ckeditor/ckeditor/ public/js/  \nfi",
+						"if [ -d \"public/js/ckeditor/\" ] && [ -d \"vendor/ckeditor/ckeditor\" ] \nthen \nrm -R public/js/ckeditor/ \nfi ",
+						"if [ -d \"vendor/ckeditor/ckeditor/\" ] \nthen \nmv vendor/ckeditor/ckeditor/ public/js/ \nfi",
+						"if [ -d \"public/js/ckeditor/.git/\" ] \nthen \nrm -R public/js/ckeditor/.git/ \nfi ",
 						"if [ -d \"vendor/ckeditor/\" ] \nthen \nrm -R vendor/ckeditor/ \nfi",
-						"if [ -d \"public/js/kcfinder/\" ] \nthen \nrm -R public/js/kcfinder/ \nfi ",
-						"if [ -d \"vendor/sunhater/kcfinder/\" ] \nthen \nmv vendor/sunhater/kcfinder/ public/js/  \nfi",
+						"if [ -d \"public/js/kcfinder/\" ] && [ -d \"vendor/ckeditor/kcfinder\" ] \nthen \nrm -R public/js/kcfinder/ \nfi ",
+						"if [ -d \"vendor/sunhater/kcfinder/\" ] \nthen \nmv vendor/sunhater/kcfinder/ public/js/ \nfi",
+						"if [ -d \"public/js/kcfinder/.git/\" ] \nthen \nrm -R public/js/kcfinder/.git/ \nfi ",
 						"if [ -d \"vendor/sunhater/\" ] \nthen \nrm -R vendor/sunhater/ \nfi"
 						]
 						},
