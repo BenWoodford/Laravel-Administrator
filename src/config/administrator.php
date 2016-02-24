@@ -10,6 +10,20 @@ return array(
 	'uri' => 'admin',
 
 	/**
+	 *  Domain for routing.
+	 *
+	 *  @type string
+	 */
+	'domain' => '',
+
+	/**
+	 *  Middleware for admin routing.
+	 *
+	 *  @type array
+	 */
+	'middleware' => array(),
+
+	/**
 	 * Page title
 	 *
 	 * @type string
@@ -117,7 +131,7 @@ return array(
 	/**
 	 * Global default rows per page
 	 *
-	 * @type NULL|int
+	 * @type int
 	 */
 	'global_rows_per_page' => 20,
 
