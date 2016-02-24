@@ -4,7 +4,7 @@ Administrator is an administrative interface builder for [Laravel](http://larave
 
 - **Author:** Jan Hartigan
 - **Website:** [http://frozennode.com](http://administrator.frozennode.com/)
-- **Version:** 5.0.1
+- **Version:** 5.0.11
 
 [![Build Status](https://travis-ci.org/FrozenNode/Laravel-Administrator.png?branch=master)](https://travis-ci.org/FrozenNode/Laravel-Administrator)
 
@@ -12,13 +12,13 @@ Administrator is an administrative interface builder for [Laravel](http://larave
 
 ## Composer
 
-To install Administrator as a Composer package to be used with Laravel 5, simply add this to your composer.json:
+To install Administrator as a Composer package to be used with Laravel 5, simply run:
 
-```json
-"frozennode/administrator": "5.*"
+```sh
+composer require "frozennode/administrator: 5.*"
 ```
 
-..and run `composer update`.  Once it's installed, you can register the service provider in `config/app.php` in the `providers` array:
+Once it's installed, you can register the service provider in `config/app.php` in the `providers` array:
 
 ```php
 'providers' => [
@@ -62,6 +62,50 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 
 ## Recent Changelog
+
+### 5.0.11
+- Bugfix: Had to make the middleware additon backwards compatable
+- Docs: Added doc updates
+
+### 5.0.10
+- Bugfix: L5.2 changed the way url() works so added url('/') instead
+- Added: Support for middleware additions to the Admin routes via the administrator config
+- Testfix: Fixed failing tests
+
+### 5.0.9
+- Bugfix: Fix for datetimepicker partially being covered by top menu  
+
+### 5.0.8
+- Bugfix: Rename Bool class to Boolean to fix PHP 7 
+- Bugfix: added missing custom attribute field
+
+### 5.0.7
+- Bugfix: Fixed boolean true bug 
+- Bugfix: Fixes a bug where soft deletes are not being properly detected in L5
+
+### 5.0.6
+- Added: Support for custom domains in the admin routes
+- Added: Ability to access the model from withinthe column output renderer
+- Added: Dynamic Form Request Validation
+
+### 5.0.5
+- Added: Added password field to the settings view
+- Added: Romanian Language
+- Added: Basic HasMany Implementation along with re-ordering support
+- Bugfix: Autocomplete working with default value
+- Bugfix: Adding missing session to Admin Controller
+- Bugfix: Fixed improper handling of filter value 0 for Enum/Text field
+- Docfix: Simplified the composer command in the install docs to match the packagist.org instuctions
+- Docfix: Changed the type definition for global_rows_per_page to int instead of Null|nt since Null causes divide by 0 error
+
+### 5.0.4
+- Testfix: fixing tests and js for gulp
+
+### 5.0.3
+- Cherry Picking v4.16.7
+
+### 5.0.2
+- Cherry Picking v4.16.6
 
 ### 5.0.1
 - Bugfix: Fixing csrf token mismatches for some requests
