@@ -92,6 +92,7 @@ class AdminController extends Controller {
 			}
 			
 			$model->setVisible(array());
+			$model->setHidden(array());
 
 			$response = $actionPermissions['view'] ? response()->json($model) : response()->json(array(
 				'success' => false,
